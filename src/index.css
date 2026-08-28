@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FLOWAX TRAVEL — Design Tokens
+   차콜 베이스 + 선셋 오렌지→마젠타 포인트
+   ============================================================ */
+@theme {
+  --color-ink-900: #08080a;
+  --color-ink-800: #0e0e12;
+  --color-ink-700: #16161c;
+  --color-ink-600: #22222b;
+  --color-ink-500: #34343f;
+
+  --color-flare-1: #ff6b2c;
+  --color-flare-2: #e8348b;
+  --color-flare-3: #ffb443;
+
+  --font-display: "Noto Serif KR", "Nanum Myeongjo", serif;
+  --font-sans: "Pretendard Variable", Pretendard, "Inter", system-ui, sans-serif;
+  --font-mono-num: "Inter", system-ui, sans-serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  :root {
+    --flare-gradient: linear-gradient(110deg, #ffb443 0%, #ff6b2c 45%, #e8348b 100%);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    background-color: var(--color-ink-900);
+    scroll-behavior: auto;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-ink-800);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* 시네마틱 연출 — 브라우저 스크롤바 전역 숨김 (레퍼런스 Step 1) */
+  html,
+  body,
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  ::selection {
+    background: var(--color-flare-2);
+    color: #fff;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+/* ============================================================
+   Lenis 스무스 스크롤
+   ============================================================ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+@utility text-flare {
+  background-image: var(--flare-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-flare {
+  background-image: var(--flare-gradient);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono-num);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+@utility num {
+  font-family: var(--font-mono-num);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+@utility edge-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* 글로우 오브 */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 필름 그레인 */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainShift 0.6s steps(2) infinite;
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-3%, 2%); }
+  50%  { transform: translate(2%, -3%); }
+  75%  { transform: translate(-2%, -2%); }
+  100% { transform: translate(3%, 3%); }
+}
+
+/* 레퍼런스 Step 2/3 — fade-in-up (navbar → hero 스태거) */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeInUp 0.95s var(--ease-expo) forwards;
+}
+
+/* 가로 무한 마퀴 */
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marqueeReverse {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 48s) linear infinite;
+}
+.marquee-track[data-reverse="true"] {
+  animation-name: marqueeReverse;
+}
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* 커스텀 커서 */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  border-radius: 9999px;
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-active,
+  .cursor-active a,
+  .cursor-active button {
+    cursor: none;
+  }
+}
+
+/* 접근성 — 모션 최소화 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain { animation: none; }
+  .marquee-track { animation: none; }
+}

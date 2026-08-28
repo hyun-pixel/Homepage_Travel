@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="flare" x1="0" y1="630" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E8348B"/>
+      <stop offset="0.5" stop-color="#FF6B2C"/>
+      <stop offset="1" stop-color="#FFB443"/>
+    </linearGradient>
+    <radialGradient id="orbA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FF6B2C" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FF6B2C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E8348B" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#E8348B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0B0B0F"/>
+  <circle cx="130" cy="90" r="380" fill="url(#orbA)"/>
+  <circle cx="1090" cy="600" r="420" fill="url(#orbB)"/>
+
+  <!-- 산 실루엣 -->
+  <path d="M0 630 L200 400 L330 520 L470 350 L640 560 L790 430 L920 540 L1060 400 L1200 560 L1200 630 Z"
+        fill="#16161C" opacity="0.9"/>
+  <path d="M0 630 L250 470 L420 570 L600 440 L760 590 L950 500 L1200 620 L1200 630 Z"
+        fill="#08080A"/>
+
+  <!-- 마크 -->
+  <g transform="translate(96,86)">
+    <rect width="72" height="72" rx="16" fill="#08080A" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g transform="translate(4,4) scale(0.9375)">
+      <path d="M14 46 L26 27 L36 41 L42 33 L54 46 Z" fill="url(#flare)" opacity="0.35"/>
+      <path d="M10 46 L24 22 L33 35 L38 28 L50 46 Z" fill="url(#flare)"/>
+      <path d="M24 22 L19.5 30 L24 28.5 L28 30.5 L33 35 Z" fill="#08080A" opacity="0.55"/>
+    </g>
+  </g>
+
+  <text x="192" y="136" font-family="'Malgun Gothic', 'Segoe UI', Arial, sans-serif" font-size="21" font-weight="600"
+        letter-spacing="7" fill="#FFFFFF" fill-opacity="0.62">ADVENTURE TRAVEL</text>
+
+  <text x="96" y="352" font-family="Georgia, 'Times New Roman', 'Noto Serif KR', serif" font-size="128" font-weight="700"
+        letter-spacing="-2" fill="url(#flare)">FLOWAX</text>
+  <text x="96" y="452" font-family="Georgia, 'Times New Roman', 'Noto Serif KR', serif" font-size="72" font-weight="400"
+        letter-spacing="14" fill="#FFFFFF">TRAVEL</text>
+
+  <rect x="98" y="500" width="86" height="3" fill="url(#flare)"/>
+  <text x="98" y="552" font-family="'Malgun Gothic', 'Segoe UI', Arial, sans-serif" font-size="27" fill="#FFFFFF" fill-opacity="0.72">
+    히말라야 · 파타고니아 · 킬리만자로 트레킹 전문
+  </text>
+
+  <text x="1104" y="552" text-anchor="end" font-family="'Malgun Gothic', 'Segoe UI', Arial, sans-serif" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" fill-opacity="0.4">SINCE 2016</text>
+</svg>
