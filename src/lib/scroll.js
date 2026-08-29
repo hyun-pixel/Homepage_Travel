@@ -8,11 +8,15 @@ export const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+const prefersNativeTouchScroll = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(hover: none), (pointer: coarse)').matches
+
 let lenis = null
 
 /** Lenis 관성 스크롤 초기화 + GSAP ScrollTrigger 동기화 */
 export function initSmoothScroll() {
-  if (lenis || prefersReducedMotion()) return lenis
+  if (lenis || prefersReducedMotion() || prefersNativeTouchScroll()) return lenis
 
   lenis = new Lenis({
     lerp: 0.085,
@@ -54,7 +58,7 @@ export function scrollToTop(immediate = true) {
 export function scrollToId(id, offset = -80) {
   const el = document.getElementById(id)
   if (!el) return
-  if (lenis) lenis.scrollTo(el, { offset, duration: 1.4 })
+  if (lenis) lenis.scrollTo(el, { offset, duration: 1.4, force: true })
   else el.scrollIntoView({ behavior: 'smooth' })
 }
 

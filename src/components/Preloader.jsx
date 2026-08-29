@@ -12,11 +12,19 @@ export default function Preloader({ onDone }) {
   const [open, setOpen] = useState(false)
   const [gone, setGone] = useState(false)
   const doneRef = useRef(false)
+  const onDoneRef = useRef(onDone)
+  onDoneRef.current = onDone
 
   useEffect(() => {
+    if (doneRef.current) {
+      lockScroll(false)
+      return
+    }
+
     if (prefersReducedMotion()) {
       setGone(true)
-      onDone?.()
+      lockScroll(false)
+      onDoneRef.current?.()
       return
     }
 
@@ -39,7 +47,7 @@ export default function Preloader({ onDone }) {
         setTimeout(() => {
           setGone(true)
           lockScroll(false)
-          onDone?.()
+          onDoneRef.current?.()
         }, 1150)
       }
     }
@@ -49,7 +57,7 @@ export default function Preloader({ onDone }) {
       cancelAnimationFrame(raf)
       lockScroll(false)
     }
-  }, [onDone])
+  }, [])
 
   const panel = {
     initial: { y: 0 },

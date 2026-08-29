@@ -61,7 +61,7 @@ export default function Hero() {
       {/* 배경 영상 */}
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         src={SITE.heroVideo}
         autoPlay
         loop
