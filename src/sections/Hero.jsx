@@ -174,7 +174,7 @@ export default function Hero() {
 
       {/* 하단 스크롤 큐 */}
       <div
-        className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-3"
+        className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-3"
         aria-hidden
       >
         {ready && (
