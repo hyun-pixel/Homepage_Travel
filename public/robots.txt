@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: 실제 도메인으로 교체하세요
-Sitemap: https://flowax.travel/sitemap.xml
+# 현재 운영 사이트의 사이트맵
+Sitemap: https://flowaxtravel.vercel.app/sitemap.xml

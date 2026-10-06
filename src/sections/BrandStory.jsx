@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Img from '../components/Img'
 import Reveal from '../components/Reveal'
 import SplitText from '../components/SplitText'
+import { SITE } from '../data/site'
 
 const PILLARS = [
   {
@@ -59,7 +60,7 @@ export default function BrandStory() {
       <div className="relative mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="max-w-[820px]">
           <Reveal>
-            <p className="eyebrow text-flare-1">03 — Why FLOWAX</p>
+            <p className="eyebrow text-flare-1">03 — {SITE.brand}의 약속</p>
           </Reveal>
           <SplitText
             as="h2"
@@ -68,7 +69,7 @@ export default function BrandStory() {
           />
           <Reveal delay={0.15}>
             <p className="mt-6 max-w-[560px] text-[15px] leading-relaxed text-white/60">
-              FLOWAX는 2016년 안나푸르나 한 팀에서 시작했습니다. 열 번째 시즌을 지나는 지금도
+              {SITE.brand}는 2016년 안나푸르나 한 팀에서 시작했습니다. 열 번째 시즌을 지나는 지금도
               기준은 같습니다 — 무리하지 않고, 남기지 않고, 다시 오고 싶게.
             </p>
           </Reveal>

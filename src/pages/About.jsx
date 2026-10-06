@@ -57,10 +57,10 @@ export default function About() {
     <>
       <Seo
         title="브랜드 소개"
-        description="2016년 안나푸르나의 한 팀에서 시작해 열 번째 시즌. FLOWAX가 지켜온 안전 기준과 가이드를 소개합니다."
+        description={`2016년 안나푸르나의 한 팀에서 시작해 열 번째 시즌. ${SITE.brand}가 지켜온 안전 기준과 가이드를 소개합니다.`}
       />
       <PageHero
-        eyebrow="About FLOWAX"
+        eyebrow={`${SITE.brand} 소개`}
         title="무리하지 않고 남기지 않고 다시 오고 싶게"
         desc="2016년 안나푸르나의 한 팀에서 시작해 열 번째 시즌을 지나고 있습니다. 우리가 지켜온 기준을 그대로 공개합니다."
         image="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1920&q=80"
@@ -70,10 +70,12 @@ export default function About() {
 
       {/* 스토리 */}
       <section className="relative bg-ink-800 py-24 md:py-32">
-        <div
-          className="orb -left-40 top-10 h-[500px] w-[500px] opacity-20"
-          style={{ background: 'radial-gradient(circle,#ff6b2c,transparent 65%)' }}
-        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            className="orb -left-40 top-10 h-[500px] w-[500px] opacity-20"
+            style={{ background: 'radial-gradient(circle,#ff6b2c,transparent 65%)' }}
+          />
+        </div>
         <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <Img

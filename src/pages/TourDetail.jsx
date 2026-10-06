@@ -61,10 +61,12 @@ export default function TourDetail() {
       </PageHero>
 
       <section className="relative bg-ink-800 pb-28 pt-16 md:pb-36">
-        <div
-          className="orb -right-40 top-20 h-[520px] w-[520px] opacity-20"
-          style={{ background: 'radial-gradient(circle,#e8348b,transparent 65%)' }}
-        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            className="orb -right-40 top-20 h-[520px] w-[520px] opacity-20"
+            style={{ background: 'radial-gradient(circle,#e8348b,transparent 65%)' }}
+          />
+        </div>
 
         <div className="relative mx-auto max-w-[1400px] px-5 md:px-10">
           {/* 스펙 요약 */}

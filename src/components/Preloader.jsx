@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { SITE } from '../data/site'
+import BrandLogo from './BrandLogo'
 import { lockScroll, prefersReducedMotion } from '../lib/scroll'
 
 /**
@@ -102,8 +102,8 @@ export default function Preloader({ onDone }) {
               style={{ background: 'radial-gradient(circle,#ff6b2c,transparent 65%)' }}
             />
             <p className="eyebrow relative text-white/45">Adventure Travel Since 2016</p>
-            <h1 className="relative font-display text-[clamp(2.5rem,9vw,5.5rem)] font-black leading-none tracking-tight">
-              <span className="text-flare">{SITE.brand}</span>
+            <h1 className="relative w-[min(78vw,480px)]">
+              <BrandLogo className="h-auto w-full" />
             </h1>
             <div className="relative flex w-full max-w-[320px] flex-col gap-3">
               <div className="h-px w-full bg-white/10">

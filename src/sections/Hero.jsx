@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SITE } from '../data/site'
 import { useReady } from '../context/ReadyContext'
 import { gsap, ScrollTrigger, scrollToId, prefersReducedMotion } from '../lib/scroll'
@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger, scrollToId, prefersReducedMotion } from '../lib/sc
  * 레퍼런스 Step 1 / Step 3 스펙 고정 구현.
  *  - 100vh, 배경 영상 object-cover, autoplay / loop / muted / playsinline
  *  - 오버레이: 상단 black 10% → 하단 black 40%
- *  - 헤드라인: 38px(모바일) / 56px(데스크톱), font-medium, line-height 1.1
+ *  - 헤드라인: 모바일 화면 폭에 맞춤 / 최대 56px(데스크톱), font-medium, line-height 1.1
  *  - 서브: 15px(모바일) / 18px(데스크톱), white 80%
  *  - CTA: 흰 배경 / 검정 텍스트 / 15px / medium / px-[26px] py-[12px] / hover scale-105
  *  - 네비 이후 스태거 fade-in-up
@@ -16,6 +16,23 @@ export default function Hero() {
   const ready = useReady()
   const rootRef = useRef(null)
   const videoRef = useRef(null)
+  const [videoPaused, setVideoPaused] = useState(prefersReducedMotion)
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = (event) => {
+      if (event.matches) setVideoPaused(true)
+    }
+    media.addEventListener('change', onChange)
+    return () => media.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (videoPaused) video.pause()
+    else video.play().catch(() => setVideoPaused(true))
+  }, [videoPaused])
 
   // 스크롤 시 배경 영상에 가벼운 패럴랙스 + 페이드
   useEffect(() => {
@@ -63,12 +80,13 @@ export default function Hero() {
         ref={videoRef}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         src={SITE.heroVideo}
-        autoPlay
+        autoPlay={!videoPaused}
+        aria-hidden="true"
         loop
         muted
         playsInline
         preload="auto"
-        poster="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80"
+        poster={SITE.heroPoster}
       />
 
       {/* 다크 그라데이션 오버레이 (상단 10% → 하단 40%) */}
@@ -105,8 +123,8 @@ export default function Hero() {
             </p>
 
             <h1
-              className="animate-fade-up mt-6 font-display font-medium text-white"
-              style={{ ...stagger(1), fontSize: 'clamp(38px, 5.6vw, 56px)', lineHeight: 1.1 }}
+              className="animate-fade-up mt-6 font-display text-[clamp(28px,8.8vw,38px)] font-medium text-white sm:text-[clamp(38px,5.6vw,56px)]"
+              style={{ ...stagger(1), lineHeight: 1.1 }}
             >
               세상의 끝까지
               <br />
@@ -143,6 +161,16 @@ export default function Hero() {
           </>
         )}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setVideoPaused((paused) => !paused)}
+        aria-label={videoPaused ? '배경 영상 재생' : '배경 영상 일시정지'}
+        aria-pressed={videoPaused}
+        className="absolute bottom-8 left-5 z-10 rounded-full border border-white/30 bg-black/25 px-3 py-2 text-[12px] text-white/80 backdrop-blur-sm transition-colors hover:bg-black/45 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:left-10"
+      >
+        {videoPaused ? '영상 재생' : '영상 일시정지'}
+      </button>
 
       {/* 하단 스크롤 큐 */}
       <div

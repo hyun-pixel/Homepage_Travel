@@ -95,6 +95,7 @@ export default function Tours() {
                 <div className="flex items-center gap-3">
                   <span className="num text-[12px] text-white/40">{list.length}개 코스</span>
                   <select
+                    aria-label="코스 정렬"
                     value={sort}
                     onChange={(e) => setSort(e.target.value)}
                     className="appearance-none rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[13px] text-white outline-none transition-colors focus:border-flare-1"

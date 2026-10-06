@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { SITE } from '../data/site'
 
 const upsert = (attr, key, content) => {
   if (!content) return
@@ -28,7 +29,7 @@ const upsertLink = (rel, href) => {
  */
 export default function Seo({ title, description, image }) {
   useEffect(() => {
-    const full = title ? `${title} | FLOWAX TRAVEL` : 'FLOWAX TRAVEL'
+    const full = title ? `${title} | ${SITE.brandFull}` : SITE.brandFull
     document.title = full
 
     upsert('name', 'description', description)
@@ -37,10 +38,10 @@ export default function Seo({ title, description, image }) {
     upsert('property', 'og:url', window.location.href)
     upsert('name', 'twitter:title', full)
     upsert('name', 'twitter:description', description)
-    if (image) {
-      upsert('property', 'og:image', image)
-      upsert('name', 'twitter:image', image)
-    }
+    const shareImage = image || new URL('/og-image.png?v=tripmount-1', window.location.origin).href
+    upsert('property', 'og:image', shareImage)
+    upsert('property', 'og:image:alt', image ? full : `${SITE.brandFull} — 어드벤처 트레킹 전문`)
+    upsert('name', 'twitter:image', shareImage)
     upsertLink('canonical', window.location.href)
   }, [title, description, image])
 

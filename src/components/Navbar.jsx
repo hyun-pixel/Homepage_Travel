@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import BrandLogo from './BrandLogo'
 import { SITE, NAV_ITEMS } from '../data/site'
 import { lockScroll, scrollToId } from '../lib/scroll'
 
 /**
  * 레퍼런스 Step 2 스펙 고정:
- *  - 로고: 텍스트만 / white / semibold / text-xl
+ *  - 로고: 승인한 산봉우리·여행길 심볼 + 트립마운트 한글 워드마크
  *  - 메뉴: 정확히 14px / font-normal / white 90%
  *  - 우측 버튼: 투명 배경 + 흰 보더 / 14px regular / hover 시 white 배경 + black 텍스트
  *  - 모바일 햄버거 (데스크톱 숨김)
@@ -32,6 +33,24 @@ export default function Navbar({ ready = true }) {
   useEffect(() => {
     lockScroll(menuOpen)
     return () => lockScroll(false)
+  }, [menuOpen])
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMenuOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
   const go = (to) => (e) => {
@@ -63,12 +82,12 @@ export default function Navbar({ ready = true }) {
           } transition-all duration-500 ${ready ? 'animate-fade-up' : 'opacity-0'}`}
           style={ready ? { animationDelay: '0.1s' } : undefined}
         >
-          {/* 로고 — 텍스트만, 아이콘 없음 */}
+          {/* 브랜드 로고 */}
           <Link
             to="/"
-            className="group relative text-xl font-semibold tracking-tight text-white"
+            className="group relative inline-flex min-h-11 shrink-0 items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            {SITE.brand}
+            <BrandLogo className="h-7 w-auto md:h-8" />
             <span className="absolute -bottom-1 left-0 h-px w-0 bg-flare transition-all duration-500 group-hover:w-full" />
           </Link>
 
@@ -104,6 +123,7 @@ export default function Navbar({ ready = true }) {
               className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
               aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
             >
               <span
                 className={`h-px w-6 bg-white transition-all duration-400 ${
@@ -129,6 +149,7 @@ export default function Navbar({ ready = true }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-navigation"
             className="fixed inset-0 z-[64] flex flex-col justify-center bg-ink-900/97 px-7 backdrop-blur-2xl md:hidden"
             initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}

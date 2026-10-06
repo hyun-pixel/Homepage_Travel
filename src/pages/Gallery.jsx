@@ -124,10 +124,12 @@ export default function Gallery() {
 
       {/* 매거진 그리드 */}
       <section className="relative bg-ink-800 py-20 md:py-28">
-        <div
-          className="orb left-1/3 top-20 h-[520px] w-[520px] opacity-15"
-          style={{ background: 'radial-gradient(circle,#ffb443,transparent 65%)' }}
-        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            className="orb left-1/3 top-20 h-[520px] w-[520px] opacity-15"
+            style={{ background: 'radial-gradient(circle,#ffb443,transparent 65%)' }}
+          />
+        </div>
         <div className="relative mx-auto max-w-[1400px] px-5 md:px-10">
           <div className="grid auto-rows-[190px] grid-cols-2 gap-4 md:auto-rows-[230px] md:grid-cols-4">
             {GALLERY.map((g, i) => (

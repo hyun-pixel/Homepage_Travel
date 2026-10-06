@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import BrandLogo from './BrandLogo'
 import { SITE } from '../data/site'
 import { TOURS } from '../data/tours'
 
@@ -31,8 +32,8 @@ export default function Footer() {
       <div className="relative mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Link to="/" className="text-xl font-semibold tracking-tight text-white">
-              {SITE.brand}
+            <Link to="/" className="inline-flex min-h-11 items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              <BrandLogo className="h-10 w-auto" />
             </Link>
             <p className="mt-4 max-w-[300px] text-[13.5px] leading-relaxed text-white/50">
               {SITE.tagline}
@@ -97,7 +98,7 @@ export default function Footer() {
               WebkitTextStroke: '1px rgba(255,255,255,0.10)',
             }}
           >
-            FLOWAX TRAVEL
+            {SITE.brandFull}
           </p>
         </div>
 
@@ -112,7 +113,7 @@ export default function Footer() {
               <span className="num">통신판매업신고 {company.mailOrderNo}</span>
               <span className="num">관광사업자 등록번호 {company.tourismNo}</span>
             </div>
-            <p className="num shrink-0">© 2026 {SITE.brandFull}</p>
+            <p className="num shrink-0">© 2026 {SITE.brandFull}</p>
           </div>
         </div>
       </div>

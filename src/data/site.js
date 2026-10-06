@@ -3,13 +3,15 @@
  * ⚠️ 아래 회사 정보는 모두 자리표시자(더미)입니다. 실제 값으로 교체하세요.
  */
 export const SITE = {
-  brand: 'FLOWAX',
-  brandFull: 'FLOWAX TRAVEL',
+  brand: '트립마운트',
+  brandFull: '트립마운트',
+  logo: '/branding/tripmount-logo.svg',
+  logoOnDark: '/branding/tripmount-logo-on-dark.svg',
   tagline: '세상의 끝까지, 가장 가벼운 마음으로',
 
-  // 레퍼런스 지정 히어로 배경 영상 (공백은 %20 인코딩)
-  heroVideo:
-    'https://cdn.sceneai.art/Hero%20Section%20Video/01d1f8de-fec0-4bf5-8b48-9fc2dbc8c6b0.mp4',
+  // Higgsfield로 제작한 비행기 창문·설산 풍경의 15초 무음 반복 영상
+  heroVideo: '/videos/flowax-hero-alpine-loop.mp4',
+  heroPoster: '/videos/flowax-hero-alpine-poster.jpg',
 
   // 상담 채널 — 실제 링크로 교체하세요
   kakaoUrl: 'https://pf.kakao.com/_flowax', // TODO: 실제 카카오톡 채널 주소
@@ -24,7 +26,7 @@ export const SITE = {
 
   // TODO: 아래 사업자 정보를 실제 값으로 교체하세요
   company: {
-    name: '플로왁스트래블 주식회사',
+    name: '트립마운트',
     ceo: '홍길동',
     address: '서울특별시 강남구 테헤란로 000, 00층',
     bizNo: '000-00-00000',

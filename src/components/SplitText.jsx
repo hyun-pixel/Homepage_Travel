@@ -60,7 +60,7 @@ export default function SplitText({
               data-char
               aria-hidden
               className="inline-block will-change-transform"
-              style={{ transform: 'translateY(115%)', opacity: 0 }}
+              style={{ opacity: 0 }}
             >
               {ch}
             </span>

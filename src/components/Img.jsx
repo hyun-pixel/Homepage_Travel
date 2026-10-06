@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 /**
  * 이미지 로드 실패에 3단계로 대응한다.
@@ -19,7 +19,7 @@ export default function Img({
   const [stage, setStage] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setStage(0)
     setLoaded(false)
   }, [src])

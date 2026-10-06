@@ -16,14 +16,16 @@ export default function PageHero({
 }) {
   return (
     <header className={`relative w-full overflow-hidden ${height}`}>
-      <Img
-        src={image}
-        seed={seed}
-        alt=""
-        loading="eager"
-        className="absolute inset-0 h-full w-full"
-        imgClassName="scale-105"
-      />
+      <div className="absolute inset-0">
+        <Img
+          src={image}
+          seed={seed}
+          alt=""
+          loading="eager"
+          className="h-full w-full"
+          imgClassName="scale-105"
+        />
+      </div>
       <div
         className="absolute inset-0"
         style={{
